@@ -77,7 +77,7 @@ def convert_image_to_ascii(image):
     pixels = image.load()
     for y in range(imgy):
         for x in range(imgx):
-            w = float(pixels[x, y]) / 255
+            w = float(pixels[x, y]) / 255 / intensity_multiplier
             # find closest weight match
             wf = -1.0; k = -1
             for i in range(len(weights)):
@@ -126,6 +126,10 @@ def start_music(musicFileName):
 
 im = Image.open("carlton.gif")
 frames = extract_gif_frames(im, fillEmpty=True)
+
+#defines how much sensitivity it has while looking for weights. Change to see the effects.
+intensity_multiplier = 4
+
 ascii_frames = convert_frames_to_ascii(frames)
 start_music("song.mp3")
 time.sleep(11)#I like the idea of carlton poping up just as Tom Jones starts singing, so we delay the animation a bit.
